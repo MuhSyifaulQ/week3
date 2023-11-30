@@ -31,7 +31,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 import axios from "axios";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 const auth = useAuthStore();
 const username = ref("");
@@ -48,33 +48,30 @@ const handleLogin = async () => {
     }
   })
   if (response.data.status === "success") {
-    Swal.fire({
+  Swal.fire({
     title: 'Login Success!',
     text: 'Welcome back!',
     icon: 'success',
     confirmButtonText: 'Cool'
-  })
-  auth.login(username.value)
-  router.push('/')
-  }
-
-  if (response.data.status === "error, username not found") {
-    Swal.fire({
-      title: 'Error',
-      text: 'Wrong username',
-      icon: 'warning',
-      confirmButtonText: 'Try again'
-    })
-  }
-
-  if (response.data.status === "error, wrong password") {
-    Swal.fire({
-      title: 'Error',
-      text: 'Wrong password',
-      icon: 'warning',
-      confirmButtonText: 'Try again'
-    })
-  }
-console.log(response)
+  });
+  auth.login(username.value);
+  router.push('/');
+} else if (response.data.status === "error, username not found") {
+  Swal.fire({
+    title: 'Error',
+    text: 'Wrong username',
+    icon: 'warning',
+    confirmButtonText: 'Try again'
+  });
+} else if (response.data.status === "error, wrong password") {
+  Swal.fire({
+    title: 'Error',
+    text: 'Wrong password',
+    icon: 'warning',
+    confirmButtonText: 'Try again'
+  });
+} else {
+  console.log(response);
+}
 }
 </script>
